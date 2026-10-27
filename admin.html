@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مدیریت منوی رومانو</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background:#101010; color:#f5f5f5; font-family:Tahoma,sans-serif; }
+    .admin-wrap { max-width:900px; margin:30px auto; padding:20px; }
+    .admin-panel { background:#1b1b1b; border:1px solid #333; border-radius:16px; padding:22px; margin-bottom:20px; }
+    .admin-panel h2 { color:#ef4444; margin-top:0; }
+    .admin-form { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .admin-form label { display:flex; flex-direction:column; gap:7px; font-size:14px; }
+    .admin-form input,.admin-form select,.admin-form textarea {
+      width:100%; box-sizing:border-box; padding:12px; border-radius:9px;
+      border:1px solid #444; background:#111; color:white; font:inherit;
+    }
+    .admin-form textarea { min-height:75px; resize:vertical; }
+    .full { grid-column:1/-1; }
+    .price-options { border:1px solid #444; border-radius:12px; padding:14px; display:grid; gap:12px; }
+    .price-options h3 { margin:0 0 4px; font-size:16px; }
+    .price-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .admin-button { border:0; border-radius:9px; padding:12px 16px; background:#dc2626; color:white; cursor:pointer; font:inherit; }
+    .admin-button.secondary { background:#333; }
+    .admin-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+    .admin-item { border:1px solid #383838; padding:15px; border-radius:12px; margin-top:12px; }
+    .admin-item h3 { margin:0 0 8px; }
+    .admin-item p { color:#ccc; margin:6px 0; }
+    .admin-item-actions { display:flex; gap:8px; margin-top:12px; }
+    .admin-item-actions button { padding:8px 12px; }
+    .message { margin-top:12px; color:#fca5a5; white-space:pre-wrap; }
+    .hidden { display:none !important; }
+    @media(max-width:600px) {
+      .admin-form,.price-row { grid-template-columns:1fr; }
+      .admin-wrap { padding:12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="admin-wrap">
+    <h1>ROMANO <span style="color:#ef4444">/ مدیریت</span></h1>
+
+    <section id="login-panel" class="admin-panel">
+      <h2>ورود مدیر</h2>
+      <form id="login-form" class="admin-form">
+        <label class="full">ایمیل مدیر
+          <input id="login-email" type="email" required autocomplete="username">
+        </label>
+        <label class="full">رمز عبور
+          <input id="login-password" type="password" required autocomplete="current-password">
+        </label>
+        <button id="login-button" class="admin-button full" type="submit">ورود</button>
+      </form>
+      <p id="login-message" class="message"></p>
+    </section>
+
+    <section id="admin-content" class="hidden">
+      <div class="admin-panel">
+        <p>حساب مدیر: <strong id="admin-user-email"></strong></p>
+        <button id="logout-button" class="admin-button secondary" type="button">خروج</button>
+      </div>
+
+      <section class="admin-panel">
+        <h2 id="form-title">افزودن محصول</h2>
+
+        <form id="product-form" class="admin-form">
+          <input id="product-id" type="hidden">
+
+          <label>نام محصول
+            <input id="product-name" required maxlength="100" placeholder="مثلاً پیتزا مخصوص رومانو">
+          </label>
+
+          <label>دسته‌بندی
+            <select id="product-category" required>
+              <option value="pizza">پیتزا</option>
+              <option value="sandwich">ساندویچ</option>
+              <option value="drink">نوشیدنی</option>
+            </select>
+          </label>
+
+          <label class="full">توضیحات
+            <textarea id="product-description" placeholder="مواد تشکیل‌دهنده یا توضیحات محصول"></textarea>
+          </label>
+
+          <label>برچسب (اختیاری)
+            <input id="product-tag" maxlength="40" placeholder="مثلاً پرفروش">
+          </label>
+
+          <label>وضعیت محصول
+            <select id="product-available">
+              <option value="true">موجود</option>
+              <option value="false">ناموجود</option>
+            </select>
+          </label>
+
+          <section id="pizza-prices" class="price-options full">
+            <h3>قیمت سایزهای پیتزا (تومان)</h3>
+            <div class="price-row">
+              <label>کوچک
+                <input id="pizza-small" type="number" min="0" step="1000" placeholder="قیمت کوچک">
+              </label>
+              <label>متوسط
+                <input id="pizza-medium" type="number" min="0" step="1000" placeholder="قیمت متوسط">
+              </label>
+            </div>
+            <label>بزرگ
+              <input id="pizza-large" type="number" min="0" step="1000" placeholder="قیمت بزرگ">
+            </label>
+          </section>
+
+          <section id="sandwich-prices" class="price-options full hidden">
+            <h3>قیمت حالت‌های ساندویچ (تومان)</h3>
+            <label>بدون قارچ و پنیر
+              <input id="sandwich-plain" type="number" min="0" step="1000" placeholder="قیمت بدون قارچ و پنیر">
+            </label>
+            <label>با قارچ و پنیر
+              <input id="sandwich-extra" type="number" min="0" step="1000" placeholder="قیمت با قارچ و پنیر">
+            </label>
+          </section>
+
+          <label id="drink-price-field" class="full hidden">قیمت نوشیدنی (تومان)
+            <input id="product-price" type="number" min="0" step="1000" placeholder="قیمت">
+          </label>
+
+          <div class="admin-actions full">
+            <button id="save-product" class="admin-button" type="submit">ذخیره محصول</button>
+            <button id="cancel-edit" class="admin-button secondary hidden" type="button">لغو ویرایش</button>
+          </div>
+          <p id="form-message" class="message full"></p>
+        </form>
+      </section>
+
+      <section class="admin-panel">
+        <h2>محصولات ثبت‌شده (<span id="admin-product-count">۰</span>)</h2>
+        <div id="admin-product-list">در حال بارگذاری...</div>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
