@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="منوی دیجیتال رستوران رومانو">
+
+  <title>ROMANO | منوی رستوران</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- کتابخانه Supabase؛ باید قبل از menu.js بارگذاری شود -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- کد نمایش منو -->
+  <script src="menu.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="صفحه اصلی رومانو">
+      <span class="brand-mark">R</span>
+      <span class="brand-name">ROMANO</span>
+    </a>
+
+    <span class="header-label">منوی رستوران</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">WELCOME TO ROMANO</p>
+
+      <h1>
+        طعم خوب،<br>
+        <span>انتخاب تو.</span>
+      </h1>
+
+      <p class="hero-description">
+        منوی رومانو را ببین و غذای موردعلاقه‌ات را انتخاب کن.
+      </p>
+    </section>
+
+    <nav class="category-nav" aria-label="دسته‌بندی محصولات">
+      <button class="category-button active" data-category="all">
+        همه
+      </button>
+
+      <button class="category-button" data-category="pizza">
+        پیتزا
+      </button>
+
+      <button class="category-button" data-category="sandwich">
+        ساندویچ
+      </button>
+
+      <button class="category-button" data-category="drink">
+        نوشیدنی
+      </button>
+    </nav>
+
+    <section class="menu-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">OUR MENU</p>
+          <h2>منوی رومانو</h2>
+        </div>
+
+        <span id="product-count">در حال بارگذاری...</span>
+      </div>
+
+      <div id="menu-products" class="product-grid">
+        <p>در حال آماده‌سازی منو...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span class="brand-name">ROMANO</span>
+    <p>ساخته‌شده برای عاشقان غذای خوب.</p>
+  </footer>
+</body>
+</html>
